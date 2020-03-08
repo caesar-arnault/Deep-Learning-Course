@@ -1,0 +1,17 @@
+import math
+def my_math0(a, b , c):
+        if not isinstance(a,(int, float)) and not isinstance(b, (int, float)) and not isinstance(c, (int, float)) :
+            raise TypeError("输入的参数类型有误" + a)
+        else:
+            dist = pow(b,2) - (4 * a * c)
+            print(dist)
+            if dist == 0:
+                result = -b / (2 * a)
+                print("只有一个相同的实数：", result)
+            if dist < 0:
+                print("没有实数结果")
+            if dist > 0:                
+                result1 = (-b + math.sqrt(dist)) /2 * a
+                result2 = (-b - math.sqrt(dist)) / 2 * a
+                print("有两个实数结果：",result1,"和",result2)
+my_math0(-2,1,6)
