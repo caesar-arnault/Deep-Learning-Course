@@ -1,0 +1,29 @@
+import matplotlib.pyplot as plt 
+import numpy as np 
+import tensorflow as tf 
+
+boston_housing=tf.keras.datasets.boston_housing
+(train_x,train_y),(_,_)=boston_housing.load_data(test_split=0)
+
+plt.rcParams['font.sans-serif']='SimHei'
+plt.rcParams['axes.unicode_minus']=False
+
+titles=["CRIM","ZU","INDUS","CHAS","NOX","RM","AGE","DIS","RAD","TAX",
+"PTRATIO","B","LSTAT"]
+j=1
+for i in titles:
+    if(j<10):
+        str=j+" "+"--"+" "+i
+        print(str)
+    else:
+        str=j+" "+"-"+" "+i
+        print(str)    
+    j+=1
+val=input("请选择属性：")
+
+plt.scatter(train_x[:,val-1],train_y)
+plt.xlabel(titles[val-1])
+plt.ylabel("Price($1000's)")
+plt.title(str(val)+"."+titles[val-1]+" - Price")
+
+plt.show()
