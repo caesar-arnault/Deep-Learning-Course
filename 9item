@@ -1,0 +1,36 @@
+import tensorflow as tf 
+x1=[137.97,104.50,100.00,124.32,79.20,99.00,124.00,114.00,106.69,138.05,53.75,
+46.91,68.00,63.02,81.26,86.21]
+x2=[3.,2.,2.,3.,1.,2.,3.,2.,2.,3.,1.,1.,1.,1.,2.,2.]
+x0=[1.,1.,1.,1.,1.,1.,1.,1.,1.,1.,1.,1.,1.,1.,1.,1.]
+y=[145.00,110.00,93.00,116.00,65.32,104.00,118.00,91.00,62.00,133.00,51.00,
+45.00,78.50,69.65,75.69,95.30]
+tx1=tf.constant(x1)
+tx2=tf.constant(x2)
+ty=tf.constant(y)
+tx0=tf.constant(x0)
+X=tf.stack([tx0,tx1,tx2],1)
+Y=tf.reshape(y,(-1,1))
+XT=tf.transpose(X)
+s1=tf.linalg.inv(tf.matmul(XT,X))
+s2=tf.matmul(s1,XT)
+W=tf.matmul(s2,Y)
+W=W.numpy().reshape(-1)
+print("请输入房屋面积和房间数，预测房屋销售价格")
+n=0
+while(n==0):
+    try:
+        test1=float(input("商品房面积："))
+        while(test1<20. or test1>500.):
+            print("输入数据范围不合理,请重新输入20-500之间的实数")
+            test1=float(input("商品房面积："))
+        test2=int(input("房间数："))
+        while(test2<1 or test2>10):
+            print("输入数据范围不合理,请重新输入1-10之间的整数")
+            test2=int(input("房间数："))
+        n=1
+    except ValueError:
+        print("输入数据类型错误,请重新输入")
+    
+pre=W[1]*test1+W[2]*test2+W[0]
+print("预测价格：",round(pre,2),"万元")
