@@ -1,0 +1,17 @@
+import tensorflow as tf 
+import numpy as np
+x=[ 64.3, 99.6, 145.45, 63.75, 135.46, 92.85, 86.97, 144.76, 59.3, 116.03]
+y=[ 62.55, 82.42, 132.62, 73.31, 131.05, 86.57, 85.49, 127.44, 55.25, 104.84]
+tx=tf.constant(x)
+ty=tf.constant(y)
+ptx=tf.reduce_sum(tx)
+pty=tf.reduce_sum(ty)
+s1=0.0
+s2=0.0
+for i in range(len(x)):
+    s1+=x[i]*y[i]
+    s2+=x[i]*x[i]
+w=(s1*len(x)-ptx*pty)/(s2*len(x)-ptx*ptx)
+b=(pty-w*ptx)/len(x)
+print("w=",w)
+print("b=",b)
