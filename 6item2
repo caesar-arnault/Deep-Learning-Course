@@ -13,17 +13,17 @@ titles=["CRIM","ZU","INDUS","CHAS","NOX","RM","AGE","DIS","RAD","TAX",
 j=1
 for i in titles:
     if(j<10):
-        str=j+" "+"--"+" "+i
-        print(str)
+        str1=str(j)+" "+"--"+" "+i
+        print(str1)
     else:
-        str=j+" "+"-"+" "+i
-        print(str)    
+        str1=str(j)+" "+"-"+" "+i
+        print(str1)    
     j+=1
 val=input("请选择属性：")
 
-plt.scatter(train_x[:,val-1],train_y)
-plt.xlabel(titles[val-1])
+plt.scatter(train_x[:,int(val)-1],train_y)
+plt.xlabel(titles[int(val)-1])
 plt.ylabel("Price($1000's)")
-plt.title(str(val)+"."+titles[val-1]+" - Price")
+plt.title(val+"."+titles[int(val)-1]+" - Price")
 
 plt.show()
